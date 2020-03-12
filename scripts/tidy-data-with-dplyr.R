@@ -10,3 +10,10 @@ library(tidyverse)
 # Dplyr is an R package that provides a flexible grammar for manipulation of dataframes
 # We won't actually use any standard R dataframes here -- we will work with data as 'tibbles', or dplyr's version of tables
 
+### Load external data with readr ====
+
+### Mutate, select, filter, summarise, arrange ====
+
+### Gather and spread ====
+
+### Pipe operator ====
