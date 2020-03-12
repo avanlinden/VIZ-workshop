@@ -115,6 +115,12 @@ sqrt(y)
 
 3 != 3 #output should be FALSE
 
+### Getting help ====
 
+# running a function or package name with ? in front of it will take you to the documentation for that object, like so:
+
+?sqrt
+?c
+?dplyr
 
 
