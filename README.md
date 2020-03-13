@@ -4,8 +4,8 @@ R scripts and data for the UMass VIZ group workshop "Data Visualization in R" on
 <br>
 ## Resources for getting comfortable with R:
 <br>
-[A great introduction to tidy data and basic R by Brian Evans at the Smithsonian Migratory Bird Center]<https://smbc-nzp.github.io/home.html>
-[The classic R for Data Science by Garret Grolemund and Hadley Wickham]<https://r4ds.had.co.nz/>
+![A great introduction to tidy data and basic R by Brian Evans at the Smithsonian Migratory Bird Center]<https://smbc-nzp.github.io/home.html>
+![The classic R for Data Science by Garret Grolemund and Hadley Wickham]<https://r4ds.had.co.nz/>
 <br>
 ## Need more ggplot? Great resources here:
 <br>
