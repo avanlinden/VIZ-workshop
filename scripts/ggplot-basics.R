@@ -253,6 +253,32 @@ txsamp %>%
   scale_colour_viridis_d(option = 'inferno') +
   theme_classic() #change the theme because the default really gets to me
 
+### Maps =====
+
+#you can do maps in regular ggplot, or use the extension package 'ggmaps', which is great!
+
+#get crime data from US states
+arrests <- USArrests %>% 
+  rownames_to_column() %>% 
+  as_tibble() %>% 
+  rename(region = rowname) %>% 
+  mutate(region = tolower(region))
+  
+#retrieve map data and merge with crime data
+  
+states_map <- map_data("state")
+arrests_map <- left_join(states_map, arrests, by = "region")
+
+# Create the map
+arrests_map %>% 
+  ggplot(aes(long, lat, group = group))+
+    geom_polygon(aes(fill = Murder), color = "white")+
+    scale_fill_viridis_c(option = "C") + #viridis continuous scale
+    theme_classic()
+
+
 ### Heatmaps ====
+
+
 
 ### Manhattan Plots ===
