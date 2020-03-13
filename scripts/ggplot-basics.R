@@ -7,6 +7,39 @@ library(tidyverse)
 
 ### Data + aesthetic mapping + geometry ====
 
+#To build a graph in ggplot2, we start by mapping variables in the dataset to aesthetic properties of a graph geometry (e.g., x, y, size, color)
+
+#here we specify the data and the aesthetic mappings we want to use, then create an "empty" graph
+ggplot(data = mpg, aes(x = cty, y = hwy))
+
+#we have to add a geomtery in order to see the data
+
+ggplot(data = mpg, aes(x = cty, y = hwy)) +
+  geom_point()
+
+#we can also add other layers, such as data transformations, text, coordinates, scales, and themes
+
+ggplot(data = mpg, aes(x = cty, y = hwy)) +
+  geom_point(aes(color = cyl)) +
+  geom_smooth(method = 'lm') + 
+  theme_minimal()
+
+#it's also really handy to use the pipe operator, like so:
+
+mpg %>%  #we are say, taking the mpg data set AND THEN build the following plot:
+  ggplot(aes(x = cty, y = hwy)) +
+  geom_point(aes(color = cyl)) +
+  geom_smooth(method = 'lm') + 
+  theme_minimal()
+
+#you can store the plot as its own object 
+
+mpg_plot <- ggplot(data = mpg, aes(x = cty, y = hwy)) +
+  geom_point(aes(color = cyl)) +
+  geom_smooth(method = 'lm') + 
+  theme_minimal()
+
+mpg_plot
 
 ### 1D Continuous: Histograms ====
 
