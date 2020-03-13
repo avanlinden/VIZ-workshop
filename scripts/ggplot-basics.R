@@ -91,7 +91,25 @@ vertData %>%
 
 ### Stats: visualize data transformation ====
 
+# you can use a stat layer to transform the original dataset
+
+# so we can do a 2d density contour plot of our mpg data
+mpg %>% 
+  ggplot(aes(x = cty, y = hwy)) +
+  stat_density2d(contour = TRUE,n = 100)
+
 ### Faceting ====
+
+#we can create multiple 'facets' of a plot based on one or more discrete variables:
+
+#let's look at centrum width versus body mass for each of the seven vertebrae:
+vertData %>% 
+  filter(measure == 'CW') %>% #filter the data
+  ggplot(aes(logBMSS, logValue)) + #map x and y variables
+    geom_point() + #point geometry
+    facet_wrap(~ vertebra) #facet wrap by vetebra
+
+#seriously faceting is the best
 
 ### Color and shape scales ====
 
