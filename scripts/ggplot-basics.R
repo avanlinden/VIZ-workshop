@@ -118,14 +118,14 @@ vertData %>%
 #discrete groups: color based on fighting style
 vertData %>% 
   filter(vertebra == 'C2' & measure == 'CW') %>% 
-    ggplot(aes(x = logBMSS, y = logValue)) +
-      geom_point(aes(color = fightStyle))
+    ggplot(aes(x = logBMSS, y = logValue, color = fightStyle)) +
+      geom_point()
 
 # we can also add shapes; e.g., males and females have different shapes
 vertData %>% 
   filter(vertebra == 'C2' & measure == 'CW') %>% 
-  ggplot(aes(x = logBMSS, y = logValue)) +
-  geom_point(aes(color = fightStyle, shape = sex))
+  ggplot(aes(x = logBMSS, y = logValue, color = fightStyle, shape = sex)) +
+  geom_point()
 
 # we can specify which colors by adding a 'scale' layer
 
@@ -137,9 +137,70 @@ vertData %>%
 
 ### Labels and text ====
 
-#
+#you can adjust plot titles, axis labels, and other text pretty easily
+
+vertData %>% 
+  filter(vertebra == 'C2' & measure == 'CW') %>% 
+  ggplot(aes(x = logBMSS, y = logValue, color = fightStyle, shape = sex)) +
+  geom_point() +
+  ggtitle("Centrum Width vs Body Mass in Ruminant Mammals") +
+  xlab("log Body Mass") +
+  ylab("log Centrum Width")
+
+#can move or adjust the legend:
+vertData %>% 
+  filter(vertebra == 'C2' & measure == 'CW') %>% 
+  ggplot(aes(x = logBMSS, y = logValue, color = fightStyle, shape = sex)) +
+  geom_point() +
+  ggtitle("Centrum Width vs Body Mass in Ruminant Mammals") +
+  xlab("log Body Mass") +
+  ylab("log Centrum Width") +
+  theme(legend.position = 'bottom')
+
+#we can add labels to individual points -- I sometimes found it helpful for data exploration but not always final figures
+vertData %>% 
+  filter(vertebra == 'C2' & measure == 'CW') %>% 
+  ggplot(aes(x = logBMSS, y = logValue, label = spp)) + # add a label argument to the aesthetic mappings
+  geom_point() +
+  geom_text(size = 2, vjust = -1) #add a geom_text layer
 
 ### Themes ====
+
+#the theme layer controls a number of aspects of how the graph looks and there are lots of pre-built themes available! I personally hate the default theme and always use theme_classic or theme_minimal
+
+vertData %>% 
+  filter(vertebra == 'C2' & measure == 'CW') %>% 
+  ggplot(aes(x = logBMSS, y = logValue, color = fightStyle, shape = sex)) +
+  geom_point() +
+  ggtitle("Centrum Width vs Body Mass in Ruminant Mammals") +
+  xlab("log Body Mass") +
+  ylab("log Centrum Width") +
+  theme_classic() # better theme!
+
+vertData %>% 
+  filter(vertebra == 'C2' & measure == 'CW') %>% 
+  ggplot(aes(x = logBMSS, y = logValue, color = fightStyle, shape = sex)) +
+  geom_point() +
+  ggtitle("Centrum Width vs Body Mass in Ruminant Mammals") +
+  xlab("log Body Mass") +
+  ylab("log Centrum Width") +
+  theme_dark(legend.position) #maybe not as helpful here
+
+# there are also tons of other available themes in the package ggtheme
+
+install.packages("ggthemes")
+library(ggthemes)
+
+vertData %>% 
+  filter(vertebra == 'C2' & measure == 'CW') %>% 
+  ggplot(aes(x = logBMSS, y = logValue, shape = sex)) +
+  geom_point() +
+  ggtitle("Centrum Width vs Body Mass") +
+  xlab("log Body Mass") +
+  ylab("log Centrum Width") +
+  theme_wsj(base_size = 10) #just kidding, we know the Wall Stree Journal would never publish the word "sex"
+
+#if there's a theme you want, probably someone has made it!
 
 ### Color palettes and other fun stuff ====
 
