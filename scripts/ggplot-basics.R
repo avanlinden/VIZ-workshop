@@ -227,7 +227,31 @@ mpg %>%
 
 #my favorite palette: Viridis!
 
+install.packages("viridisLite")
+library(viridisLite)
 
+#Viridis with discrete data:
+
+#texas housing data before Viridis
+txsamp <- subset(txhousing, city %in%
+                   c("Houston", "Fort Worth", "San Antonio", "Dallas", "Austin"))
+txsamp %>% 
+  ggplot(aes(x = sales, y = median)) +
+    geom_point(aes(colour = city))
+
+#after viridis default palette:
+
+txsamp %>% 
+  ggplot(aes(x = sales, y = median)) +
+  geom_point(aes(colour = city)) +
+  scale_colour_viridis_d() #this is the discrete
+
+#or the viridis inferno palette
+txsamp %>% 
+  ggplot(aes(x = sales, y = median)) +
+  geom_point(aes(colour = city)) +
+  scale_colour_viridis_d(option = 'inferno') +
+  theme_classic() #change the theme because the default really gets to me
 
 ### Heatmaps ====
 
