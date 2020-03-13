@@ -273,12 +273,5 @@ arrests_map <- left_join(states_map, arrests, by = "region")
 arrests_map %>% 
   ggplot(aes(long, lat, group = group))+
     geom_polygon(aes(fill = Murder), color = "white")+
-    scale_fill_viridis_c(option = "C") + #viridis continuous scale
+    scale_fill_viridis_c() + #viridis continuous scale
     theme_classic()
-
-
-### Heatmaps ====
-
-
-
-### Manhattan Plots ===
