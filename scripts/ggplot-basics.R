@@ -62,7 +62,32 @@ mpg %>% ggplot(aes(hwy)) +
 
 ### 2D Continuous: points, lines ====
 
+#you've all been waiting for it, it's time for scatter plots and line plots!
+#we use an aesthetic mappy of the city mpg for x and the hwy mpg for y
+
+mpg %>% 
+  ggplot(aes(x = cty, y = hwy)) + # can use 'cty' or 'x = cty', sometimes I like to spell it out so I don't forget
+  geom_point()
+
+# you can use geom_smooth to add a layer with a smoothing function; default is a loess smoother
+
+mpg %>% 
+  ggplot(aes(x = displ, y = hwy)) +
+  geom_point() +
+  geom_smooth()
+
 ### 2D Discrete x, Continuous y: boxplot, bar plot ====
+
+#boxplots! Let's use my ruminant vertebra data and practice a little pre-plot tidying:
+
+vertData
+
+#we will make a boxplot of C2 centrum width for the two different groups of fighting behaviors:
+
+vertData %>% 
+  filter(vertebra == 'C2' & measure == 'CW') %>% #filter the data
+  ggplot(aes(x = fightStyle, y = logValue)) + #map fighting style to the x axis and centrum width to the y
+    geom_boxplot() #add the boxplot geometry
 
 ### Stats: visualize data transformation ====
 
