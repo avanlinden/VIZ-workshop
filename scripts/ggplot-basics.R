@@ -204,6 +204,30 @@ vertData %>%
 
 ### Color palettes and other fun stuff ====
 
+# people who are much smarter and aesthetically gifted than me have made a wealth of R color palettes that are useful for visualizing data
+
+#RColorBrewer
+
+library(RColorBrewer)
+
+display.brewer.all()
+
+#discrete data with color brewer
+mpg %>% 
+  ggplot(aes(x = cty, y = hwy, color = drv )) +
+    geom_point() +
+    scale_color_brewer(palette = 'Set1')
+
+#use "color_distiller" for continuous data
+
+mpg %>% 
+  ggplot(aes(x = cty, y = hwy, color = cyl )) +
+  geom_point() +
+  scale_color_distiller(palette = 'Spectral') #ok, # of cylinders isn't really continuous, but it is in this dataset
+
+#my favorite palette: Viridis!
+
+
 
 ### Heatmaps ====
 
