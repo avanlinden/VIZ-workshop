@@ -113,7 +113,31 @@ vertData %>%
 
 ### Color and shape scales ====
 
+#we can control how a plot maps individual data values to the aesthetic values with scales
+
+#discrete groups: color based on fighting style
+vertData %>% 
+  filter(vertebra == 'C2' & measure == 'CW') %>% 
+    ggplot(aes(x = logBMSS, y = logValue)) +
+      geom_point(aes(color = fightStyle))
+
+# we can also add shapes; e.g., males and females have different shapes
+vertData %>% 
+  filter(vertebra == 'C2' & measure == 'CW') %>% 
+  ggplot(aes(x = logBMSS, y = logValue)) +
+  geom_point(aes(color = fightStyle, shape = sex))
+
+# we can specify which colors by adding a 'scale' layer
+
+vertData %>% 
+  filter(vertebra == 'C2' & measure == 'CW') %>% 
+  ggplot(aes(x = logBMSS, y = logValue, color = fightStyle)) +
+    geom_point() +
+    scale_color_manual(values = c('green', 'pink')) 
+
 ### Labels and text ====
+
+#
 
 ### Themes ====
 
