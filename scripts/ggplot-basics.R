@@ -43,6 +43,23 @@ mpg_plot
 
 ### 1D Continuous: Histograms ====
 
+#If we have one continuous variable, we can build density plots or histograms
+
+mpg %>% ggplot(aes(hwy)) +
+  geom_histogram()
+
+#to see more options, use:
+?geom_histogram
+
+#we can adjust the bin width to something more useful
+mpg %>% ggplot(aes(hwy)) +
+  geom_histogram(binwidth = 5)
+
+#we can use the same aesthetic mapping for a density plot by changing the geometry
+
+mpg %>% ggplot(aes(hwy)) +
+  geom_density(kernel = 'gaussian')
+
 ### 2D Continuous: points, lines ====
 
 ### 2D Discrete x, Continuous y: boxplot, bar plot ====
