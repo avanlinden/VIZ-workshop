@@ -21,7 +21,7 @@ mpg
 
 ?dplyr::filter
 
-filter(mpg, hwy >= 30)
+good_mileage <- filter(mpg, hwy >= 30)
 
 # we can filter all cars that get at least 30mpg highway and 35mpg in the city
 
@@ -29,7 +29,7 @@ filter(mpg, hwy >= 30 & cty >= 25) #not many!
 
 #we can use 'select' to select columns from the data frame:
 
-select(mpg, year, hwy)
+select(mpg, year, hwy, make = manufacturer, model)
 
 # we can use this in conjunction with filtering
 filter(select(mpg, year, hwy), hwy >= 35)
@@ -40,7 +40,7 @@ select(mpg, city = cty, highway = hwy)
 
 # we can edit values in columns by row according to some criterion with mutate; for example, we can create a new column that has the mpg in kilometers per liter
 
-mutate(mpg, kmpl_hwy = hwy*0.425)
+mutate(mpg, kmpl_hwy = hwy*0.425, kmpl_cty = cty*0.425)
 
 # we can sort data on certain values with arrange
 
@@ -64,7 +64,7 @@ summarise(group_by(mpg, manufacturer), mean=mean(hwy))
 
 #let's read in a dataframe of mammal vertebrate measures I have
 
-verts <- read_csv("data/ruminant_vert_morph_data.csv") 
+verts <- read_csv("data/ruminant_vert_morph_data.csv")
 
 # let's take a look!
 verts
@@ -87,12 +87,14 @@ filter(vertData, str_detect(spp, "Ovis")) #str_detect is part of the stringr pac
 
 #so, take our vertData AND THEN filter it so we have just measurements from vertebra C2
 
+filter(vertData, vertebra == 'C2')
+
 vertData %>% 
   filter(vertebra == 'C2') 
 
 #it's really helpful for stringing together commands, and it allows you to trouble shoot each piece without ever overwriting the original tibble
 
-vertData %>% 
+sexMean <- vertData %>% 
   filter(vertebra == 'C2') %>%  #filter only rows from vertebra C2
   mutate(valueInMeters = value*0.01) %>%   #create a new column with the measurements in meters
   group_by(sex) %>% #group males and females
@@ -100,6 +102,8 @@ vertData %>%
 
 #the original tibble is unchanged!
 vertData
+
+sexMean
 
 ### Gather and spread ====
 

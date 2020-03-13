@@ -39,7 +39,8 @@ mpg_plot <- ggplot(data = mpg, aes(x = cty, y = hwy)) +
   geom_smooth(method = 'lm') + 
   theme_minimal()
 
-mpg_plot
+mpg_plot +
+  ggtitle("Title!")
 
 ### 1D Continuous: Histograms ====
 
@@ -59,6 +60,8 @@ mpg %>% ggplot(aes(hwy)) +
 
 mpg %>% ggplot(aes(hwy)) +
   geom_density(kernel = 'gaussian')
+
+?geom_density
 
 ### 2D Continuous: points, lines ====
 
@@ -87,7 +90,10 @@ vertData
 vertData %>% 
   filter(vertebra == 'C2' & measure == 'CW') %>% #filter the data
   ggplot(aes(x = fightStyle, y = logValue)) + #map fighting style to the x axis and centrum width to the y
-    geom_boxplot() #add the boxplot geometry
+    geom_boxplot() + #add the boxplot geometry
+    xlab("Fighting Style") +
+    ylab("log Centrum Width") +
+    ggtitle("Title!")
 
 ### Stats: visualize data transformation ====
 
@@ -106,7 +112,7 @@ mpg %>%
 vertData %>% 
   filter(measure == 'CW') %>% #filter the data
   ggplot(aes(logBMSS, logValue)) + #map x and y variables
-    geom_point() + #point geometry
+    geom_point(size = 0.5) + #point geometry
     facet_wrap(~ vertebra) #facet wrap by vetebra
 
 #seriously faceting is the best
@@ -184,7 +190,7 @@ vertData %>%
   ggtitle("Centrum Width vs Body Mass in Ruminant Mammals") +
   xlab("log Body Mass") +
   ylab("log Centrum Width") +
-  theme_dark(legend.position) #maybe not as helpful here
+  theme_dark() #maybe not as helpful here
 
 # there are also tons of other available themes in the package ggtheme
 
@@ -237,14 +243,16 @@ txsamp <- subset(txhousing, city %in%
                    c("Houston", "Fort Worth", "San Antonio", "Dallas", "Austin"))
 txsamp %>% 
   ggplot(aes(x = sales, y = median)) +
-    geom_point(aes(colour = city))
+    geom_point(aes(colour = city)) 
 
 #after viridis default palette:
 
 txsamp %>% 
   ggplot(aes(x = sales, y = median)) +
   geom_point(aes(colour = city)) +
-  scale_colour_viridis_d() #this is the discrete
+  scale_colour_viridis_d() +
+  xlim(0, 200000)
+
 
 #or the viridis inferno palette
 txsamp %>% 
@@ -269,9 +277,11 @@ arrests <- USArrests %>%
 states_map <- map_data("state")
 arrests_map <- left_join(states_map, arrests, by = "region")
 
+arrests_map
+
 # Create the map
 arrests_map %>% 
   ggplot(aes(long, lat, group = group))+
-    geom_polygon(aes(fill = Murder), color = "white")+
+    geom_polygon(aes(fill = Murder), color = "black")+
     scale_fill_viridis_c() + #viridis continuous scale
     theme_classic()
