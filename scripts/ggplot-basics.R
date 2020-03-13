@@ -29,4 +29,4 @@ library(tidyverse)
 
 ### Heatmaps ====
 
-### Genomic data ===
+### Manhattan Plots ===
