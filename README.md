@@ -23,7 +23,7 @@ R scripts and data for the UMass VIZ group workshop "Data Visualization in R" on
 
 [A ggbio tutorial for visualizing genomic data](http://www.sthda.com/english/wiki/ggbio-visualize-genomic-data)
 
-[Ggfortify - autoplots for PCA, time series, and other useful things](http://www.sthda.com/english/wiki/ggfortify-extension-to-ggplot2-to-handle-some-popular-packages-r-software-and-data-visualization)
+[ggfortify - autoplots for PCA, time series, and other useful things](http://www.sthda.com/english/wiki/ggfortify-extension-to-ggplot2-to-handle-some-popular-packages-r-software-and-data-visualization)
 
 [More info on maps from the 'maps' chapter of Elegant Graphics for Data Analysis](https://ggplot2-book.org/maps.html)
 
