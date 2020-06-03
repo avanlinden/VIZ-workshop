@@ -176,9 +176,9 @@ radBovids %>%
 ### Group by and summarize ===========
 # the file 'lobstahs.R' in the scripts folder is some code I wrote while working with Aly Putnam on some data she has on lobster counts in the Gulf of Maine that goes through some really handy summary functions! 
 
-#group_by
-#count
-#distinct
-#count_if
 
+### Suggestions to look into by OEB R Group members! =========
+
+?case_when
+?slice
 
