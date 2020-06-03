@@ -11,7 +11,7 @@ library(tidyverse)
 # We won't actually use any standard R dataframes here -- we will work with data as 'tibbles', or dplyr's version of tables
 
 # let's look at the mpg dataset, which is part of the tidyverse and is formatted as a tibble
-mpg
+mpg 
 
 ### Mutate, select, filter, summarise, arrange ====
 
@@ -75,9 +75,9 @@ vertData <- select(verts, -X1)
 vertData
 
 #we can filter and arrange this dataframe, too
-#let's look at all measurements that belong to the genus "Ovis", aka sheep
+#let's look at all measurements that belong to the species "Ovis dalli", aka Dall's sheep
 
-filter(vertData, str_detect(spp, "Ovis")) #str_detect is part of the stringr package and has nifty functions for working with character data!
+filter(vertData, spp == "Ovis dalli")
 
 ### Pipe operator ====
 
@@ -125,3 +125,60 @@ wideData <- vertData %>%
 
 wideData %>% 
   gather(CH:TPLA, key = 'measure', value = 'value') #back to a narrow dataframe
+
+### Mutate and filter level-ups (stringr, ifelse, relational databases, etc) ===============
+
+#stringr is a really nice package included in the tidyverse for maniuplating strings
+?stringr
+
+#I most commonly use str_detect to filter on parts of strings, i.e., filter all the rows that belong to the genus "Ovis" 
+
+vertData %>% 
+  filter(str_detect(spp, "Ovis")) #%>% 
+  #distinct(spp) #we can see this grabbed three different species in the genus Ovis without us specifying all the exact species
+
+#str_replace is also a handy one if you need to change some strings conditionally
+
+vertData %>% 
+  mutate(spp = str_replace(spp, "Bison", "Not-a-buffalo"))
+
+#other handy operations to look up:
+#filter_if
+#filter_at
+#coalesce
+#na_if
+#replace_na
+#if_else
+
+### Join tables =======
+
+#creating a new table with a fake variable, radness (this is a continuous variable measured using a rad-o-meter, which scans the surface of an animal and quantifies how rad it is)
+
+sppNames <- vertData %>% distinct(spp)
+
+radness <- round(rnorm(40, mean = 5, sd = 2.5), 2)
+
+radBovids <- as_tibble(cbind(sppNames, radness))
+
+#we can now join this table with our other data table
+
+left_join(vertData, radBovids, by = 'spp')
+
+# you can also do filtering joins; above both our tables have the same number of species, but we could filter out the radness measurements to only species that where radness > 10 (i.e. the only bovids you should associate with)
+
+radBovids %>% 
+  filter(radness > 10)  #there are now only 3 species in this table
+
+radBovids %>% 
+  filter(radness > 10) %>% 
+  left_join(vertData, by = 'spp')
+
+### Group by and summarize ===========
+# the file 'lobstahs.R' in the scripts folder is some code I wrote while working with Aly Putnam on some data she has on lobster counts in the Gulf of Maine that goes through some really handy summary functions! 
+
+#group_by
+#count
+#distinct
+#count_if
+
+
